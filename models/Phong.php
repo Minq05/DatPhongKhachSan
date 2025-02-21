@@ -93,14 +93,17 @@ class Phong
         }
     }
 
-    public function getAllRooms() {
+    public function getAllRooms()
+    {
         $sql = "SELECT id, trang_thai_id FROM phongs";
         $stmt = $this->conn->query($sql);
         return $stmt->fetchAll();
     }
 
-    public function updateRoomStatus($room_id) {
+    public function updateRoomStatus($room_id)
+    {
         $sql = "UPDATE phongs SET trang_thai_id = 1 WHERE id = $room_id";
         $this->conn->query($sql);
     }
+
 }

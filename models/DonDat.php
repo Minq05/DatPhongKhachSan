@@ -1,12 +1,14 @@
 <?php
-class DonDat {
+class DonDat
+{
     public $conn; // Khai bao phuong thuc 
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->conn = connectDB();
     }
 
-    public function postBooking($tai_khoan_id,$phong_id,$check_in,$check_out,$trang_thai_id,$phuong_thuc_id,$don_gia)
+    public function postBooking($tai_khoan_id, $phong_id, $check_in, $check_out, $trang_thai_id, $phuong_thuc_id, $don_gia)
     {
         $sql = "INSERT INTO `don_dats` (`tai_khoan_id`, `phong_id`, `check_in`, `check_out`, `trang_thai_id`, `don_gia`, `phuong_thuc_id`) VALUES ('$tai_khoan_id', '$phong_id', '$check_in', '$check_out', '$trang_thai_id','$don_gia', '$phuong_thuc_id')";
         $this->conn->query($sql);
@@ -42,7 +44,7 @@ class DonDat {
                     INNER JOIN `phongs`
                     ON `don_dats`.`phong_id` = `phongs`.`id`
                     WHERE `don_dats`.`tai_khoan_id` = $id";
-                    
+
             $stmt = $this->conn->prepare($sql);
 
             $stmt->execute();
@@ -53,10 +55,26 @@ class DonDat {
         }
     }
 
-    public function getBookings() {
+    public function getBookings()
+    {
         $sql = "SELECT phong_id, check_out FROM don_dats";
         $stmt = $this->conn->query($sql);
         return $stmt->fetchAll();
     }
+
+    public function updateStatus()
+    {
+        $sql = "SELECT * FROM don_dats";
+        $stmt = $this->conn->query($sql);
+        $data = $stmt->fetchAll();
+        foreach ($data as $value) {
+            $check_out = $value['check_out'];
+            $phong_id = $value['phong_id'];
+            $today = date("Y-m-d");
+            if ($today > $check_out) {
+                $sql = "UPDATE phongs SET trang_thai_id = 1 WHERE id = $phong_id";
+                $this->conn->query($sql);
+            }
+        }
+    }
 }
-?>

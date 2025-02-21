@@ -226,4 +226,21 @@ class HomeController
             }
         }
     }
+
+    public function payment()
+    {
+        require_once './views/payment.php';
+    }
+
+    public function checkPayment()
+    {
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $this->modelDonDat->updateStatus($id);
+            header("Location: " . BASE_URL . '?act=don-dat');
+        } else {
+            echo "<script>alert('ID không hợp lệ.');</script>";
+            header("Location: " . BASE_URL . '?act=don-dat');
+        }
+    }
 }

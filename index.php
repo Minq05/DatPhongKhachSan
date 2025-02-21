@@ -55,4 +55,8 @@ match ($act) {
     'huy-don-dat' => (new HomeController())->huyDondat(),
 
     'logout' => (new HomeController())->logOut(),
+
+    'payment' => (new HomeController())->payment(),
+
+    'check-payment' => (new HomeController())->checkPayment(),
 };
