@@ -48,4 +48,16 @@ class TaiKhoan
             echo "LOI" . $e->getMessage();
         }
     }
+
+    public function editDetailKhach($id, $ho_ten, $email, $dien_thoai, $password)
+    {
+        //    Cau lenh SQL
+        try {
+            $sql = "UPDATE `tai_khoans` SET `ho_ten` = '$ho_ten', `password` = '$password' , `email` = '$email', `dien_thoai` = '$dien_thoai' WHERE `tai_khoans`.`id` = $id;";
+
+            $this->conn->query($sql);
+        } catch (Exception $e) {
+            echo "LOI" . $e->getMessage();
+        }
+    }
 }

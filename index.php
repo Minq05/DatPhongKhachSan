@@ -28,6 +28,12 @@ match ($act) {
 
     'chi-tiet-phong' => (new HomeController())->chiTietPhong(),
 
+    'thong-tin-khach' => (new HomeController())->getDetailKhach(),
+
+    'postEditKhachHang' => (new HomeController())->editKhach(),
+
+    'form-edit-khach' => (new HomeController())->formEditKhach(),
+
     'login' => (new HomeController())->formLogin(),
 
     'register' => (new HomeController())->formRegister(),
@@ -48,8 +54,5 @@ match ($act) {
 
     'huy-don-dat' => (new HomeController())->huyDondat(),
 
-
     'logout' => (new HomeController())->logOut(),
-    
-
 };

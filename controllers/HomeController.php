@@ -28,6 +28,45 @@ class HomeController
         require_once './views/phongFilter.php';
     }
 
+    public function getDetailKhach()
+    {
+        $id = $_GET['id'];
+        $khach = $this->modelTaiKhoan->getUser($id);
+        require_once './views/detailKhach.php';
+    }
+
+    public function editKhach()
+    {
+        $id = $_GET['id'];
+        $ho_ten = $_POST['ho_ten'];
+        $dien_thoai = $_POST['dien_thoai'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $new_password = $_POST['new_password'];
+        $confirm_new_password = $_POST['confirm_new_password'];
+
+        // Validate new password
+        if (!empty($new_password) && $new_password === $confirm_new_password) {
+            $password = $new_password;
+        }
+        if (!empty($new_password) && $new_password !== $confirm_new_password) {
+            echo "<script>alert('Mật khẩu xác nhận không khớp.');</script>";
+            header("Location: " . BASE_URL . '?act=form-edit-khach&id=' . $id);
+            exit();
+        }
+
+        $this->modelTaiKhoan->editDetailKhach($id, $ho_ten, $dien_thoai, $email, $password);
+        header("Location: " . BASE_URL . '?act=thong-tin-khach&id=' . $id);
+        exit();
+    }
+
+    public function formEditKhach()
+    {
+        $id = $_GET['id'];
+        $khach = $this->modelTaiKhoan->getUser($id);
+        require_once './views/editKhach.php';
+    }
+
     public function chiTietPhong()
     {
         $id = $_GET['id'];

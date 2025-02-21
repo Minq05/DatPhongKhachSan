@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="css/tailwind.css">
   <link rel="stylesheet" href="build/tailwind.css">
   <!-- Select css -->
-  <link rel="stylesheet" href="/khachsanTripHouse/views/css.css">
+  <link rel="stylesheet" href="/DatPhongKhachSan/views/css.css">
   <!-- Font-awesome -->
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
